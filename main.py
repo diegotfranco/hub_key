@@ -1186,7 +1186,6 @@ class MainWindow(QMainWindow):
 			for i in list_to_print: 
 				if i.text() != 'Disponível' and i.text() != 'Em uso': lista_selecionados.append(i.text())
 
-				
 			for i in self.chunks(lista_selecionados, cha_user_rela):
 				code128.image(i[0]).save(f'temp/codigo_barra_{i[0]}.png')
 
@@ -1327,12 +1326,12 @@ class MainWindow(QMainWindow):
 						self.ui.table_relatorio.item(row, col-1).setTextAlignment(Qt.AlignCenter)
 						sublista.append('/'.join(dado.split()[0].split('-')[::-1]) +'  '+str(dado.split()[1][:-3]))
 
-
 			lista.append(sublista)
 			self.lista_impressao_historico.append(sublista)
 			del sublista
 
 	def delete_imgs(self):
+		print('entrei')
 		for filename in os.listdir('temp'):
 			os.remove(f'temp/{filename}')
 	
