@@ -79,8 +79,6 @@ class WorkerThread(QThread):
 			print(e)
 
 		msg = f'Subject: hub_key - recuperacao de senha\n\nlogin: {self.para}\nsenha: {self.senha}'
-
-		#server.sendmail(de, para, msg)
 		server.sendmail(self.de, self.para, msg)
 
 
