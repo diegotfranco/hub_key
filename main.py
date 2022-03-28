@@ -294,7 +294,7 @@ class MainWindow(QMainWindow):
 		self.ui.lineEdit_searchBar.returnPressed.connect(self.clear_for_search)
 		self.ui.btn_searchBar.clicked.connect(self.clear_for_search)
 
-		#Botao imprimir historico
+		#BOTAO IMPRIMIR HISTORICO
 		self.ui.radio_selection_PrintPV.toggled.connect(lambda: self.radio_btn_selection(self.ui.radio_selection_PrintPV.isChecked()))
 		self.ui.btn_back_PrintPV.clicked.connect(self.hide_tela_impressao)
 		self.ui.pushButton_print.clicked.connect(lambda: self.show_tela_impressao(self.lista_impressao_historico, 4))
@@ -1182,6 +1182,9 @@ class MainWindow(QMainWindow):
 			for i in list_to_print: 
 				if i.text() != 'Disponível' and i.text() != 'Em uso': lista_selecionados.append(i.text())
 
+			if not os.path.isdir('temp'):
+				os.mkdir('temp')
+				
 			for i in self.chunks(lista_selecionados, cha_user_rela):
 				code128.image(i[0]).save(f'temp/codigo_barra_{i[0]}.png')
 
