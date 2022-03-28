@@ -1176,14 +1176,16 @@ class MainWindow(QMainWindow):
 		if list_to_print == []:
 			self.dialog_selecione_itens()
 			return
+		
+		if not os.path.isdir('temp'):
+			os.mkdir('temp')
+		
 		if cha_user_rela < 4:
 			lista_selecionados = []
 			lista_selecionados2 = []
 			for i in list_to_print: 
 				if i.text() != 'Disponível' and i.text() != 'Em uso': lista_selecionados.append(i.text())
 
-			if not os.path.isdir('temp'):
-				os.mkdir('temp')
 				
 			for i in self.chunks(lista_selecionados, cha_user_rela):
 				code128.image(i[0]).save(f'temp/codigo_barra_{i[0]}.png')
