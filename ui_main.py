@@ -12,8 +12,6 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
-#### rato maluco
-
 class Ui_Line(object):
 	def __init__(self, name, bar_code):
 		self.linha_01_ULI = QFrame()
@@ -53,7 +51,6 @@ class Ui_Line(object):
 
 class Ui_Line_Users(object):
 	def __init__(self, key_code, user_name, date_time, date_time2):
-
 		self.frame_line_ULU = QFrame()
 		self.frame_line_ULU.setObjectName(u"frame_line_ULU")
 		self.frame_line_ULU.setMaximumSize(QSize(16777215, 35))
@@ -111,7 +108,6 @@ class Ui_Paper(object):
 
 class Ui_Paper_Users(object):
 	def __init__(self):
-
 		self.background_papel = QFrame()
 		self.background_papel.setObjectName(u"background_papel")
 		self.background_papel.setGeometry(QRect(0, 0, 850, 1100))
@@ -193,8 +189,6 @@ class Ui_Paper_Users(object):
 		self.label_4.setText("Devolução")
 
 		self.horizontalLayout.addWidget(self.label_4)
-
-
 		self.verticalLayout.addWidget(self.frame_cabecalho)
 
 		self.frame_corpo = QFrame(self.background_papel)
@@ -209,8 +203,7 @@ class Ui_Paper_Users(object):
 
 		self.verticalLayout.addWidget(self.frame_corpo)
 
-
-class Roda_and_pe(object): # Easter egg
+class Roda_and_pe(object):
 		def __init__(self, paper_count, counter):
 			self.roda_pe_RP = QLabel()
 			self.paper_count = paper_count
@@ -223,8 +216,6 @@ class Roda_and_pe(object): # Easter egg
 			self.roda_pe_RP.setStyleSheet(u"font-family: Aldrich; margin-top: 13px; font-size: 14px; padding-right: 95px; margin-bottom: 20px;")
 			self.roda_pe_RP.setAlignment(Qt.AlignCenter)
 			self.roda_pe_RP.setText(f'Pagina {self.counter}/{self.paper_count}')
-
-#### rato maluco
 
 class LineEdit(QLineEdit):
 	def __init__(self, parent):
@@ -240,7 +231,6 @@ class LineEdit(QLineEdit):
 		self.setStyleSheet("border-top-right-radius:0px; border-bottom-right-radius:0px; border-right:1px solid #E2E2E2; padding-left: 14px")
 		self._parent.setStyleSheet("QFrame{border: 1px solid #E2E2E2; background-color: #FFF; border-radius: 16px} QLineEdit{border-radius: 15px; background-color: #fff}")
 		return super().focusOutEvent(event)
-
 
 class Ui_MainWindow(object):
 
@@ -1622,7 +1612,7 @@ class Ui_MainWindow(object):
 		self.verticalLayout_16 = QVBoxLayout(self.cabecario_01)
 		self.verticalLayout_16.setSpacing(0)
 		self.verticalLayout_16.setObjectName(u"verticalLayout_16")
-		self.verticalLayout_16.setContentsMargins(0, 0, 24, 0) #Rato
+		self.verticalLayout_16.setContentsMargins(0, 0, 24, 0)
 
 		self.search_box_3 = QFrame(self.cabecario_01)
 		self.search_box_3.setObjectName(u"search_box_3")
@@ -1788,7 +1778,6 @@ class Ui_MainWindow(object):
 		self.horizontalLayout_29.addItem(self.horizontalSpacer_43)
 		self.verticalLayout_15.addWidget(self.main_frame_btns_chave)
 
-
 		self.rodape_2 = QFrame(self.centro_tela_titulo)
 		self.rodape_2.setObjectName(u"rodape_2")
 		self.rodape_2.setMinimumSize(QSize(0, 150))
@@ -1804,7 +1793,6 @@ class Ui_MainWindow(object):
 		self.horizontalLayout_30.setObjectName(u"horizontalLayout_30")
 		self.horizontalLayout_30.setContentsMargins(0, 0, 0, 0)
 
-		# Covids das chaves
 		self.frame_covidR2 = QFrame(self.rodape_2)
 		self.frame_covidR2.setObjectName(u"frame_covidR2")
 		self.frame_covidR2.setMinimumSize(QSize(94, 0))
@@ -2375,7 +2363,6 @@ class Ui_MainWindow(object):
 		self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
 		self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0) 
 
-		# Covids dos usuarios
 		self.frame_covidL3 = QFrame(self.frame_usuarios_covid)
 		self.frame_covidL3.setObjectName(u"frame_covidL3")
 		self.frame_covidL3.setMinimumSize(QSize(94, 0))
@@ -2424,11 +2411,10 @@ class Ui_MainWindow(object):
 		self.horizontalSpacer_20 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 		self.horizontalLayout_11.addItem(self.horizontalSpacer_20)
 
-
 		self.frame_covidR3 = QFrame(self.frame_usuarios_covid)
 		self.frame_covidR3.setObjectName(u"frame_covidR3")
 		self.frame_covidR3.setMinimumSize(QSize(94, 0))
-		self.frame_covidR3.setMaximumSize(QSize(155, 16777215)) # rato esteve aqui
+		self.frame_covidR3.setMaximumSize(QSize(155, 16777215))
 		self.frame_covidR3.setStyleSheet(u"#frame_covidR3{background-color: #DEEAFF;}")
 		self.frame_covidR3.setFrameShape(QFrame.StyledPanel)
 		self.frame_covidR3.setFrameShadow(QFrame.Raised)
@@ -3088,7 +3074,7 @@ class Ui_MainWindow(object):
 		self.table_relatorio.setShowGrid(False)
 		self.table_relatorio.setFocusPolicy(Qt.NoFocus)
 		self.table_relatorio.setSelectionBehavior(QAbstractItemView.SelectRows)
-		self.table_relatorio.setEditTriggers(QAbstractItemView.NoEditTriggers) #Disabilita todos os triggers
+		self.table_relatorio.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.table_relatorio.setSortingEnabled(False)
 		self.table_relatorio.setPalette(p)
 		self.table_relatorio.setFont(font3)
@@ -3430,7 +3416,6 @@ class Ui_MainWindow(object):
 			self.combo_box_device_PrintPV.addItem(f"{i[2]}")      
 		self.combo_box_device_PrintPV.setObjectName(u"combo_box_device_PrintPV")
 		self.combo_box_device_PrintPV.setMinimumSize(QSize(182, 46))
-		# self.combo_box_device.setWindowFlags(Qt.Popup | Qt.FramelessWindowHint | Qt.NoDropShadowWindowHint)
 		self.combo_box_device_PrintPV.setStyleSheet(u"QComboBox{background-color: #DEEAFF; font-family: Aldrich; font-size: 12px; border: none;"
 														"border-top-left-radius: 5px; border-top-right-radius: 5px;	padding-left: 10px;}"
 													 "QComboBox::drop-down{width: 17px; padding-top: 1px; border-top-right-radius: 5px; border-bottom-right-radius: 5px;}"
@@ -3472,7 +3457,6 @@ class Ui_MainWindow(object):
 		self.horizontalLayout_6_PrintPV.addWidget(self.combo_box_color_PrintPV)
 		self.verticalLayout_2_PrintPV.addWidget(self.frame_color_PrintPV)
 	
-		### Copies
 		self.frame_num_cop = QFrame(self.options_PrintPV)
 		self.frame_num_cop.setObjectName(u"frame_num_cop")
 		self.frame_num_cop.setMinimumSize(QSize(0, 40))
@@ -3504,7 +3488,6 @@ class Ui_MainWindow(object):
 
 		self.horizontalLayout_77.addWidget(self.spinBox_num_copies)
 		self.verticalLayout_2_PrintPV.addWidget(self.frame_num_cop)
-		### Copies
 
 		self.frame_pages_PrintPV = QFrame(self.options_PrintPV)
 		self.frame_pages_PrintPV.setObjectName(u"frame_pages_PrintPV")
@@ -3667,7 +3650,6 @@ class Ui_MainWindow(object):
 
 		#VALIDADORES
 		#########################################################
-		#self.lineEdit_email_inicio.setValidator(self.validaEmail)
 		self.lineEdit_email_inicio.setMaxLength(50)
 		#-------------------------------------------------------#
 		self.lineEdit_senha_inicio.setMaxLength(25)

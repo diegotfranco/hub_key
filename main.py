@@ -264,11 +264,11 @@ class MainWindow(QMainWindow):
 
 		#BOTÃO CADASTRAR USUARIO
 		self.ui.btn_cad_usuarios.clicked.connect(lambda: self.ui.lineEdit_cad_nome.setFocus())
-		self.ui.btn_cad_usuarios.clicked.connect(lambda: self.ui.pages_adm.setCurrentWidget(self.ui.cad_usuarios)) #Rato2
+		self.ui.btn_cad_usuarios.clicked.connect(lambda: self.ui.pages_adm.setCurrentWidget(self.ui.cad_usuarios))
 		self.ui.btn_cad_usuarios.clicked.connect(self.default_title)
 
 		#BOTÃO IMPRIMIR
-		self.ui.btn_imp_usuarios.clicked.connect(lambda: self.show_tela_impressao(self.ui.table_lista_usuarios.selectedItems(), 3)) #Ratu
+		self.ui.btn_imp_usuarios.clicked.connect(lambda: self.show_tela_impressao(self.ui.table_lista_usuarios.selectedItems(), 3))
 
 		#BOTÃO EXCLUIR USUARIO
 		self.ui.btn_exc_usuarios.clicked.connect(self.deletaUsuario)
@@ -297,11 +297,12 @@ class MainWindow(QMainWindow):
 		#Botao imprimir historico
 		self.ui.radio_selection_PrintPV.toggled.connect(lambda: self.radio_btn_selection(self.ui.radio_selection_PrintPV.isChecked()))
 		self.ui.btn_back_PrintPV.clicked.connect(self.hide_tela_impressao)
-		self.ui.pushButton_print.clicked.connect(lambda: self.show_tela_impressao(self.lista_impressao_historico, 4)) #Ratu
+		self.ui.pushButton_print.clicked.connect(lambda: self.show_tela_impressao(self.lista_impressao_historico, 4))
 		self.ui.btn_back_PrintPV.clicked.connect(self.clear_scrollArea)
 		self.ui.btn_back_PrintPV.clicked.connect(self.delete_imgs)
 		self.ui.btn_print_PrintPV.clicked.connect(lambda: print_img(self.all_pages, self.ui.combo_box_device_PrintPV.currentText(), self.ui.lineEdit_pages_PrintPV.text(), self.ui.spinBox_num_copies.value()))
 		self.ui.btn_print_PrintPV.clicked.connect(self.dialog_impresso)
+		
 		#BOTAO VER HISTORICO
 		self.ui.pushButton_show.clicked.connect(self.load_search_date_historic)
 
@@ -492,7 +493,6 @@ class MainWindow(QMainWindow):
 		if senha:
 			senha = senha[0]
 
-		#envia o email em uma thread separada
 		self.worker = WorkerThread(self.sessao_usuario, senha)
 		self.worker.start()
 		self.worker.finished.connect(lambda: print('e-mail enviado.'))
@@ -507,7 +507,6 @@ class MainWindow(QMainWindow):
 	
 		self.ui.lineEdit_senha_inicio.setFocus()
  
-
 	def voltarInicio(self):
 		if self.sessao_usuario:
 			self.deslogar()
@@ -633,8 +632,7 @@ class MainWindow(QMainWindow):
 				print(f"row = {row}")
 				return row
 
-	def devolveChave(self, pos, chave):
-		
+	def devolveChave(self, pos, chave):	
 		row = self.encontraPosItem(chave)
 		if row == None:
 			try:
@@ -679,7 +677,6 @@ class MainWindow(QMainWindow):
 		self.popup.hide()
 
 	def carregaEmprestimo(self):
-	
 		txt = self.ui.lineEdit_busca_emprestimos.text().lower()
 		hora_atual = int(str(datetime.now().time())[:2])
 		print('hora_atual = ', hora_atual)
@@ -780,7 +777,6 @@ class MainWindow(QMainWindow):
 				print('Erro com o banco de dados: ', erro)
 				return
 
-
 		if rows:
 			msg = Dialog2(self)
 			msg.ui.label.setText('Chave(s) removida(s)')
@@ -814,7 +810,6 @@ class MainWindow(QMainWindow):
 			self.ui.lineEdit_cad_id.setText('')
 			campoInvalido = True
 		
-
 		if campoBranco:
 			msg = Dialog2(self)
 			msg.ui.label.setText('Preencha todos os')
@@ -1142,15 +1137,12 @@ class MainWindow(QMainWindow):
 			self.popup.hide()
 			self.carregaUsuarios()
 
-	#Editar Chave
 	def editarChave(self, row_source):
 		self.ui.label_6.setText("Editar Chave")
 		self.ui.lineEdit_chave_cad.setText(self.ui.table_lista_chaves.item(row_source, 1).text())
 		self.ui.lineEdit_amb_cad.setText(self.ui.table_lista_chaves.item(row_source, 2).text())
 		self.ui.pages_adm.setCurrentWidget(self.ui.cad_chaves)
 
-		
-	#Rato e usuario
 	def editarUsuario(self, row_source):
 		self.ui.label_3.setText("Editar Usu\u00e1rios")
 		self.ui.lineEdit_cad_nome.setText(self.ui.table_lista_usuarios.item(row_source, 2).text())
@@ -1165,7 +1157,6 @@ class MainWindow(QMainWindow):
 		msg.exec()
 		self.popup.hide()
 	
-	### DEF da Impressao ###
 	def dialog_impresso(self):
 		msg = Dialog2(self)
 		msg.ui.label.setText('Impresso com sucesso!')
@@ -1181,8 +1172,7 @@ class MainWindow(QMainWindow):
 		msg.exec()
 		self.popup.hide()
 
-
-	def show_tela_impressao(self, list_to_print, cha_user_rela): #Ratu
+	def show_tela_impressao(self, list_to_print, cha_user_rela):
 		if list_to_print == []:
 			self.dialog_selecione_itens()
 			return
@@ -1193,7 +1183,6 @@ class MainWindow(QMainWindow):
 				if i.text() != 'Disponível' and i.text() != 'Em uso': lista_selecionados.append(i.text())
 
 			for i in self.chunks(lista_selecionados, cha_user_rela):
-				#codigo_barra = treepoem.generate_barcode(barcode_type="code128", data=i[0])
 				code128.image(i[0]).save(f'temp/codigo_barra_{i[0]}.png')
 
 				i[0] = f'temp/codigo_barra_{i[0]}'
@@ -1205,10 +1194,8 @@ class MainWindow(QMainWindow):
 			self.user_paper(list_to_print)
 			self.ui.frame_barraLateral.hide()
 			self.ui.pages_adm.setCurrentWidget(self.ui.impressao)
-	
 
-
-	def hide_tela_impressao(self): #TODO melhorar.
+	def hide_tela_impressao(self):
 		self.ui.radio_all_pages_PrintPV.setChecked(True)
 		self.ui.frame_barraLateral.show()
 		if self.ui.frame_selected.y() == 0: 
@@ -1218,15 +1205,12 @@ class MainWindow(QMainWindow):
 		else:
 			self.ui.pages_adm.setCurrentWidget(self.ui.historico)
 
-	### DEF da Impressao ###
 	def chunks(self, lst, n):
 		splited_list = []
 		for i in range(0, len(lst), n):
 			splited_list.append(lst[i:i + n])
 		return splited_list
 
-
-	### DEF da Impressao ###
 	def radio_btn_selection(self, checked): # Acoes dos radio btn
 		if checked:
 			self.ui.lineEdit_pages_PrintPV.setEnabled(True)
@@ -1244,8 +1228,6 @@ class MainWindow(QMainWindow):
 				"border-top-right-radius: 5px;\n"
 			"")
 
-
-	### DEF da Impressao ###
 	def clear_scrollArea(self):
 		self.all_pages = []
 		for i in reversed(range(self.ui.horizontalLayout_8_PrintPV.count())):
@@ -1278,8 +1260,6 @@ class MainWindow(QMainWindow):
 			self.all_pages.append(img_path)
 			pix.save(img_path)
 
-
-	### DEF da Impressao ###
 	def papers(self, list_to_print): # Gerar folhas de impressao
 		splited_list = self.chunks(list_to_print, 6)
 
@@ -1291,7 +1271,7 @@ class MainWindow(QMainWindow):
 			self.class_paper = Ui_Paper()
 
 			for x in splited_list[i]: # Aplica os 5 usuarios em cada folha.
-				user_bar_line = Ui_Line(x[1], x[0]) #RATI
+				user_bar_line = Ui_Line(x[1], x[0])
 				self.class_paper.verticalLayout_P.addWidget(user_bar_line.linha_01_ULI)
 			self.class_paper.verticalLayout_P.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 			self.class_paper.verticalLayout_P.addWidget(rodape.roda_pe_RP)
@@ -1305,16 +1285,14 @@ class MainWindow(QMainWindow):
 			self.all_pages.append(img_path)
 			pix.save(img_path)
 
-
-	### DEFs do RATO ###
 	def load_search_date_historic(self):
 		self.lista_impressao_historico = []
 		self.ui.table_relatorio.removeRow(self.ui.table_relatorio.rowCount()-1)
+		
 		# Junta todos os valores de datas para poder fazer a conta.
 		inicial_date = '-'.join(self.ui.dateEdit_InicialDate.text().split('/')[::-1])
 		end_date = '-'.join(self.ui.dateEdit_EndDate.text().split('/')[::-1])
 
-		#self.resetaCount()
 		query = f'''SELECT id_sala, usuario_ret, usuario_dev, data_hora_retirada, data_hora_devolucao FROM  emprestimo
 						WHERE data_hora_retirada BETWEEN date('{inicial_date}')
 						AND date('{end_date}', '+1 day') ORDER BY data_hora_retirada ASC'''
@@ -1450,13 +1428,11 @@ class MainWindow(QMainWindow):
 			self.count += 1
 			self.loadData()
 			self.ui.table_relatorio.clearSelection()
-	### DEFs do RATO ###
 
 	def resetaCount(self):
 		self.count = 0
 
-	def divideString(self, string):
-		 
+	def divideString(self, string):	 
 		strings = [x+'.' for x in string.split('.')]
 		strings[-1] = strings[-1].strip('.')
 
